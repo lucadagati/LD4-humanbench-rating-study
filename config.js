@@ -6,7 +6,7 @@ window.STUDY_CONFIG = {
   contactEmail: "ldagati@unime.it",
   // Optional HTTPS endpoint that accepts a JSON POST of the answers (for example an
   // institutional survey server). Empty: answers are sent by e-mail or downloaded.
-  submitUrl: "",
+  submitUrl: "https://script.google.com/macros/s/AKfycbwJKX4pNlu-LzuFo3PoT9Xg6ir8JGdA-8GEk6aHiVPhPDSfCj6eehio8lR-2ruVSO2O/exec",
   // Ethics approval reference and Data Protection Officer contact, shown in the information sheet.
   ethicsReference: { it: "[DA COMPILARE: comitato etico, numero e data del parere]",
                      en: "[TO BE COMPLETED: ethics committee, reference number and date]" },
