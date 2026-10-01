@@ -139,6 +139,7 @@
         el("div", { class: "card" }, el("div", {}, el("b", {}, `${t.day} ${state.pos + 1} ${t.of} ${order.length}`), " ",
           el("span", { class: "daytype" }, "· " + t[dayType[id]])),
           el("img", { class: "chart", src: `figures/${state.lang}/${id}.png`, alt: `${t.day} ${state.pos + 1}` }),
+          el("img", { class: "chart legend", src: `figures/${state.lang}/legend.png`, alt: "legend" }),
           scale(t, "q1", "Q1", upd), scale(t, "q2", "Q2", upd), next));
     } else if (state.step === "final") {
       const ta = el("textarea", { on: { input: e => state.final.open = e.target.value } });

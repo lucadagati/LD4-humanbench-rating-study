@@ -27,3 +27,5 @@ button:disabled { opacity:.45; cursor:not-allowed; }
 textarea { width:100%; min-height:6rem; font:inherit; }
 code.pc { font-size:1.1rem; padding:2px 6px; background:#f1f0ec; border-radius:4px; }
 @media (max-width:600px) { .scale .end { width:100%; text-align:left !important; } }
+
+.chart.legend { margin: 4px 0 10px; opacity: .95; }
