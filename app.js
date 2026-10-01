@@ -117,7 +117,6 @@
     if (state.step === "consent") {
       const card = el("div", { class: "card" }, el("h2", {}, t.infoTitle));
       t.info.forEach(([h, p]) => card.append(el("h2", {}, h), el("p", {}, p)));
-      card.append(el("p", { class: "small" }, `${t.pi}: Luca D'Agati, ${state.lang === "it" ? "Dipartimento di Ingegneria, Università degli Studi di Messina" : "Department of Engineering, University of Messina"} (${C.contactEmail}). ${t.ethics}: ${C.ethicsReference[state.lang]}. ${t.dpo}: ${C.dpoContact[state.lang]}.`));
       const boxes = t.consent.map((c, i) => el("input", { type: "checkbox", id: "c" + i }));
       const go = el("button", { disabled: "", on: { click: () => { state.step = "instructions"; state.started = new Date().toISOString(); render(); } } }, t.agree);
       boxes.forEach((b, i) => { b.addEventListener("change", () => { go.disabled = !boxes.every(x => x.checked); }); card.append(el("div", { class: "check" }, b, el("label", { for: "c" + i }, t.consent[i]))); });
