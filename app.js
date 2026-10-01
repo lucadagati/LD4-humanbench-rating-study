@@ -32,7 +32,7 @@
       open: "Che cosa le ha fatto pensare che una giornata fosse gestita da una persona? (facoltativo)",
       doneTitle: "Grazie!",
       doneMail: "Per completare la partecipazione invii le risposte con il pulsante qui sotto (si apre il programma di posta con il messaggio già compilato). In alternativa scarichi il file e lo invii a",
-      mail: "Invia per e-mail", download: "Scarica le risposte", posted: "Risposte inviate. Grazie per la partecipazione.",
+      mail: "Invia per e-mail", download: "Scarica le risposte", posted: "Risposte inviate. Grazie per la partecipazione: non deve fare altro.", sending: "Invio in corso, non chiuda la pagina (può richiedere qualche decina di secondi)…",
       postFail: "Invio automatico non riuscito: usi l'e-mail o il download.", code: "Codice partecipante",
     },
     en: {
@@ -65,7 +65,7 @@
       open: "What made you think that a day was managed by a person? (optional)",
       doneTitle: "Thank you!",
       doneMail: "To complete your participation, send your answers with the button below (your e-mail program opens with the message already filled in). Alternatively, download the file and send it to",
-      mail: "Send by e-mail", download: "Download answers", posted: "Answers submitted. Thank you for taking part.",
+      mail: "Send by e-mail", download: "Download answers", posted: "Answers submitted. Thank you for taking part: nothing else is needed.", sending: "Sending, please do not close the page (it can take up to a minute)…",
       postFail: "Automatic submission failed: please use e-mail or download.", code: "Participant code",
     },
   };
@@ -153,16 +153,19 @@
       const json = JSON.stringify(payload);
       const card = el("div", { class: "card" }, el("h2", {}, t.doneTitle), el("p", {}, `${t.code}: `, el("code", { class: "pc" }, code)));
       const msg = el("p", {});
-      if (C.submitUrl) {
-        fetch(C.submitUrl, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: json })
-          .then(r => { msg.textContent = r.ok ? t.posted : t.postFail; }).catch(() => { msg.textContent = t.postFail; });
-      }
       const compact = state.answers.map(a => `${a.item_id}:${a.Q1}${a.Q2}`).join(",");
       const body = `code=${code}\nlang=${state.lang}\nanswers=${compact}\nq=${JSON.stringify(state.final)}\n\n${json}`;
       const mail = el("button", { on: { click: () => { location.href = `mailto:${C.contactEmail}?subject=${encodeURIComponent("CPS-HumanBench rating " + code)}&body=${encodeURIComponent(body)}`; } } }, t.mail);
       const dl = el("button", { class: "secondary", on: { click: () => {
         const a = el("a", { href: URL.createObjectURL(new Blob([json], { type: "application/json" })), download: `rating_${code}.json` }); a.click(); } } }, t.download);
-      card.append(msg, el("p", {}, `${t.doneMail} ${C.contactEmail}.`), mail, " ", dl);
+      const fallback = el("div", {}, el("p", {}, `${t.doneMail} ${C.contactEmail}.`), mail, " ", dl);
+      card.append(msg, fallback);
+      if (C.submitUrl) {
+        fallback.hidden = true; msg.textContent = t.sending;
+        const fail = () => { msg.textContent = t.postFail; fallback.hidden = false; };
+        fetch(C.submitUrl, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: json })
+          .then(r => r.ok ? r.json() : { ok: false }).then(j => { if (j && j.ok) msg.textContent = t.posted; else fail(); }).catch(fail);
+      }
       app.append(card);
     }
   }
