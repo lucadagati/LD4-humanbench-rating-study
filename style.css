@@ -1,0 +1,29 @@
+:root { --ink:#0b0b0b; --muted:#52514e; --line:#d9d7d0; --bg:#fcfcfb; --accent:#2a78d6; --warn:#a15c00; }
+* { box-sizing:border-box; }
+body { margin:0; font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; color:var(--ink); background:var(--bg); }
+main { max-width:860px; margin:0 auto; padding:16px; }
+header { display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; }
+h1 { font-size:1.35rem; margin:.4rem 0; } h2 { font-size:1.1rem; margin:1.2rem 0 .4rem; }
+.banner { background:#fff4e0; border:1px solid #f0c27a; color:var(--warn); padding:8px 12px; border-radius:6px; margin:8px 0; font-size:.9rem; }
+.lang button { margin-left:4px; }
+button { font:inherit; padding:8px 16px; border-radius:6px; border:1px solid var(--accent); background:var(--accent); color:#fff; cursor:pointer; }
+button.secondary { background:#fff; color:var(--accent); }
+button:disabled { opacity:.45; cursor:not-allowed; }
+.card { background:#fff; border:1px solid var(--line); border-radius:8px; padding:16px; margin:12px 0; }
+.chart { width:100%; height:auto; border:1px solid var(--line); border-radius:4px; background:#fff; }
+.daytype { color:var(--muted); font-size:.9rem; }
+.scale { margin:14px 0; }
+.scale .q { font-weight:600; margin-bottom:6px; }
+.scale .opts { display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
+.scale .end { font-size:.85rem; color:var(--muted); width:9.5rem; }
+.scale .end.left { text-align:right; }
+.scale label { display:flex; flex-direction:column; align-items:center; font-size:.85rem; }
+.scale input { width:22px; height:22px; margin:2px; }
+.progress { height:6px; background:var(--line); border-radius:3px; overflow:hidden; margin:8px 0 4px; }
+.progress div { height:100%; background:var(--accent); }
+.small { font-size:.85rem; color:var(--muted); }
+.check { display:flex; gap:8px; margin:6px 0; align-items:flex-start; }
+.choices label { margin-right:12px; white-space:nowrap; }
+textarea { width:100%; min-height:6rem; font:inherit; }
+code.pc { font-size:1.1rem; padding:2px 6px; background:#f1f0ec; border-radius:4px; }
+@media (max-width:600px) { .scale .end { width:100%; text-align:left !important; } }
