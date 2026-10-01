@@ -1,7 +1,7 @@
 // Study configuration. Edit before distribution.
 window.STUDY_CONFIG = {
   // true shows a banner: the study must not be distributed before ethics approval.
-  pilot: true,
+  pilot: false,
   // E-mail that receives the answers (mailto) and contact shown to participants.
   contactEmail: "ldagati@unime.it",
   // Optional HTTPS endpoint that accepts a JSON POST of the answers (for example an
