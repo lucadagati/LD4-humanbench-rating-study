@@ -154,7 +154,7 @@
       const card = el("div", { class: "card" }, el("h2", {}, t.doneTitle), el("p", {}, `${t.code}: `, el("code", { class: "pc" }, code)));
       const msg = el("p", {});
       if (C.submitUrl) {
-        fetch(C.submitUrl, { method: "POST", headers: { "Content-Type": "application/json" }, body: json })
+        fetch(C.submitUrl, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: json })
           .then(r => { msg.textContent = r.ok ? t.posted : t.postFail; }).catch(() => { msg.textContent = t.postFail; });
       }
       const compact = state.answers.map(a => `${a.item_id}:${a.Q1}${a.Q2}`).join(",");
